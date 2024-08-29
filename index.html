@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Website</title>
+</head>
+<body>
+   <div id="car-display">
+    <div class="car-buttons">
+        <button onclick="displayCar(0)">Button 1</button>
+        <button onclick="displayCar(1)">Button 2</button>
+    </div>
+    <div class="car-info">
+        <table>
+            <tr>
+                <th>Model</th>
+                <td id="model"></td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td id="name"></td>
+            </tr>
+        </table>
+    </div>
+   </div>
+   <script>
+        function fetchXML(callback) {
+            var car = new XMLHttpRequest();
+            car.open("GET", "carData.xml", true);
+            car.onreadystatechange = function() {
+                if (car.readyState === 4 && car.status === 200) {
+                    var xml = car.responseXML;
+                    callback(xml);
+                }
+            };
+            car.send();
+        }
+
+        function displayCar(index) {
+            fetchXML(function(xml) {
+                var car = xml.getElementsByTagName('car')[index];
+                var model = car.getElementsByTagName('model')[0].textContent;
+                var name = car.getElementsByTagName('name')[0].textContent;
+
+                document.getElementById('model').innerText = model;
+                document.getElementById('name').innerText = name;
+            });
+        }
+   </script>
+</body>
+</html>

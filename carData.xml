@@ -1,0 +1,10 @@
+<cars>
+    <car id="0">
+        <model>2024</model>
+        <name>Audi</name>
+    </car>
+    <car id="1">
+        <model>2026</model>
+        <name>Ferrari</name>
+    </car>
+</cars>
